@@ -1,0 +1,10 @@
+.env
+/fakesmtp/
+/mysql/
+/postgresql/
+/nginx/
+/profiler/
+/php/
+/elasticsearch/
+/data-mariadb/
+/data-mongodb/

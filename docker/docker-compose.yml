@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+  wc_web:
+    build: ./config/nginx
+    image: wc_nginx
+    container_name: wc_web
+    volumes:
+      - ./../symfony:/var/www/vhosts/symfony
+      - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
+      - ./nginx/log:/var/log/nginx
+    depends_on:
+      - wc_php
+    expose:
+      - 80
+    extra_hosts:
+      - "${VIRTUAL_HOST}:${NGINX_PROXY_IP}"
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+    restart: on-failure:10
+
+  wc_php:
+    build: ./config/php/7.3
+    image: wc_php:7.3-fpm
+    container_name: wc_php
+    volumes:
+      - ./../symfony:/var/www/vhosts/symfony
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+      - ./profiler:/tmp/xdebug
+      - ./php/log:/var/log/fpm-php
+    extra_hosts:
+      - "${VIRTUAL_HOST}:${NGINX_PROXY_IP}"
+    environment:
+      XDEBUG_CONFIG: remote_host=${NGINX_PROXY_IP}
+    working_dir: /var/www/vhosts/symfony/
+    restart: on-failure:10
+    depends_on:
+      - wc_mysql
+
+  wc_mysql:
+    image: mariadb:10.3
+    container_name: wc_mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./config:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+
+  nginx-proxy:
+    build: ./config/nginx-proxy
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+    - "80:80"
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
