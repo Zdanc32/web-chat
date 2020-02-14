@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChatRepository")
  * @ApiResource(
+ *     mercure=true,
  *     collectionOperations={
  *          "get"={
  *              "normalization_context"={
