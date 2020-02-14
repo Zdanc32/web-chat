@@ -12,7 +12,7 @@
 
 <h4>Installing and start backend project</h4>  <br />
 1. Clone this repository  <br />
-2. Install docker <link>https://docs.docker.com/get-started/</link> <br /> <br />
+2. Install docker <link>https://docs.docker.com/get-started/</link> <br />
 3. Open docker directory in project <br />
 4. Copy .env.dist file and rename from .env.dist to .env  <br />
 5. Run commend: <i><b>docker-compose up -d --build</b></i> <br /> (if you want check existing you containers run commend: <i></b>docker ps</b></i>) <br />
