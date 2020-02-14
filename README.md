@@ -15,7 +15,7 @@
 2. Install docker <link>https://docs.docker.com/get-started/</link> <br /> <br />
 3. Open docker directory in project <br />
 4. Copy .env.dist file and rename from .env.dist to .env  <br />
-5. Run commend: <i><b>docker-compose up -d --build</b></i> (if you want check existing you containers run commend: <i></b>docker ps</b> <br /></i>) <br />
+5. Run commend: <i><b>docker-compose up -d --build</b></i> <br /> (if you want check existing you containers run commend: <i></b>docker ps</b></i>) <br />
 6. Wait for docker that download all necessary extensions and lib   <br />
 7. Go to link: <link>http://api.web-chat.test/api</link> <br />
 8. Mercury installation and all necessary file you can find at my repository or link:  <br /><link>https://symfony.com/doc/current/components/mercure.html</link> <br />
