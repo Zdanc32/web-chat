@@ -1,15 +1,11 @@
 import React from 'react';
 import * as RoutingConst from "../const/RoutingConst";
 
-class ChatForm extends React.Component {
+class SendMessageForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {
-            token: window.sessionStorage.getItem('token'),
-            chats: []
-        }
     }
 
     handleChange(event) {
@@ -26,28 +22,26 @@ class ChatForm extends React.Component {
         event.preventDefault();
         const data = this.state;
         fetch(RoutingConst.API_ROUTE + RoutingConst.CHAT_ROUTE, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.token
-            }
-        }).then(
-            res => res.json()
-        ).then(
-            json => this.setState({ chats: json.results })
-        );
+                'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+            },
+            body: JSON.stringify(data),
+        }).then()
     }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="submit" value="send" />
+                    <input type="text" name="text" onChange={this.handleChange} />
+
+                    <input type="submit" value="Send" />
                 </form>
-                <span>{ console.log(this.state.chats) }</span>
             </div>
         );
     }
 }
 
-export default ChatForm
+export default SendMessageForm

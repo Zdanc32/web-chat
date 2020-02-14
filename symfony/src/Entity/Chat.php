@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Traits\BaseEntityTrait;
 use DateTime;
@@ -16,7 +17,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get"={
  *              "normalization_context"={
  *                  "groups"={"chat-base"}
- *              }
+ *              },
+ *              "security"="is_granted('ROLE_USER')"
  *          },
  *          "post"={
  *              "denormalization_context"={
@@ -28,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={
  *          "get"
  *     }
- * ))
+ * )
  */
 class Chat
 {
@@ -37,6 +39,7 @@ class Chat
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"chat-base", "input-text"})
+     * @ApiProperty(push=true)
      */
     private $text;
 

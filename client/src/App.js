@@ -1,7 +1,8 @@
 import * as React from "react";
 import RegisterForm from "./logowanie/RegisterForm";
-import LoginForm from "./logowanie/Login";
-import ChatForm from "./chat/Chat";
+import LoginForm from "./logowanie/LoginForm";
+import ChatForm from "./chat/ChatForm";
+import SendMessageForm from "./chat/SendMessageForm";
 
 
 const App = () => {
@@ -18,8 +19,12 @@ const App = () => {
                     <LoginForm/>
                 </div>
                 <div className="flex-large">
-                    <h2>Login</h2>
+                    <h2>Chat</h2>
                     <ChatForm/>
+                </div>
+                <div className="flex-large">
+                    <h2>Send message</h2>
+                    <SendMessageForm/>
                 </div>
             </div>
         </div>

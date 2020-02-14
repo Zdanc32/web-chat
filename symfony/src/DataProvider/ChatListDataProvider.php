@@ -63,13 +63,15 @@ class ChatListDataProvider implements CollectionDataProviderInterface, Restricte
 
         /**@var User $user*/
         $user = $this->security->getUser();
+            $queryBuilder = $repository->createQueryBuilder('o');
 
-        $queryBuilder = $repository->createQueryBuilder('o');
-        $queryBuilder->where(
-            'o.createdAt >= :userCreatedAt'
-        )->setParameter(
-            'userCreatedAt', $user->getCreatedAt()
-        );
+        if ($user) {
+            $queryBuilder->where(
+                'o.createdAt >= :userCreatedAt'
+            )->setParameter(
+                'userCreatedAt', $user->getCreatedAt()
+            );
+        }
 
         $queryNameGenerator = new QueryNameGenerator();
 
