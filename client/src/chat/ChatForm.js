@@ -33,7 +33,7 @@ class ChatForm extends React.Component {
             + encodeURIComponent('http://api.web-chat.com/api/chats'), {
                 method: 'GET',
                 headers: {
-                    'Authorization': 'Bearer ' +  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InN1YnNjcmliZSI6WyIqIl0sInB1Ymxpc2giOlsiKiJdfX0.O4JY6lfCFukf21NfGQLOe4SVsoAzyHb8P2EKUo1aXFg'
+                    'Authorization': 'Bearer ' +  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InN1YnNjcmliZSI6WyJmb28iLCJiYXIiXSwicHVibGlzaCI6WyJmb28iXX19.afLx2f2ut3YgNVFStCx95Zm_UND1mZJ69OenXaDuZL8'
                 }
             });
         this.eventSource.onmessage = e => {
